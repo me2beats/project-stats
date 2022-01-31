@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/project-stats/api.gd" type="Script" id=1]
+[ext_resource path="C:/Users/bigburn/AppData/Roaming/Godot/editor_settings-3.tres" type="EditorSettings" id=2]
+
+[resource]
+script = ExtResource( 1 )
+__meta__ = {
+"ed_settings": ExtResource( 2 )
+}

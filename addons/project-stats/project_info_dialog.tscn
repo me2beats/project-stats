@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/project-stats/project_info_tree.gd" type="Script" id=1]
+[ext_resource path="res://addons/project-stats/project_stats_dialog.gd" type="Script" id=2]
+
+[node name="AcceptDialog" type="AcceptDialog"]
+margin_right = 500.0
+margin_bottom = 504.0
+window_title = "Project Stats"
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+margin_right = 484.0
+margin_bottom = 432.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Main" type="Tree" parent="VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpdateSettings" type="Tree" parent="VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/TabContainer/UpdateSettings"]
+margin_right = 20.0
+margin_bottom = 20.0
+items = [ "Update on popup", null, 0, false, false, 1, 0, null, "", false, "Don't use", null, 0, false, false, 2, 0, null, "", false ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 436.0
+margin_right = 484.0
+margin_bottom = 460.0
+
+[node name="ShowCodingTime" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+margin_right = 203.0
+margin_bottom = 24.0
+text = "show coding time in output"
+flat = true
+
+[node name="ColorPickerPanel" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 207.0
+margin_right = 257.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "output panel default primary color"
+
+[node name="ColorPickerPanel2" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 261.0
+margin_right = 311.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "output panel default secondary color"
+
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="VBoxContainer/TabContainer/Main" method="_on_TabContainer_tab_changed"]
+[connection signal="custom_popup_edited" from="VBoxContainer/TabContainer/Main" to="VBoxContainer/TabContainer/Main" method="_on_custom_popup_edited"]
+[connection signal="custom_popup_edited" from="VBoxContainer/TabContainer/UpdateSettings" to="VBoxContainer/TabContainer/UpdateSettings" method="_on_custom_popup_edited"]
+[connection signal="index_pressed" from="VBoxContainer/TabContainer/UpdateSettings/PopupMenu2" to="VBoxContainer/TabContainer/UpdateSettings" method="_on_dropdown_index_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/ShowCodingTime" to="." method="_on_ShowUpdateModes_toggled"]
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/ColorPickerPanel" to="." method="_on_ColorPickerPanel_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/ColorPickerPanel2" to="." method="_on_ColorPickerPanel2_color_changed"]
